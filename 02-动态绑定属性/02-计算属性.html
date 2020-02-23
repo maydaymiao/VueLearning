@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- 这种方式，如果变量多的话，并不利于阅读和管理 -->
+      <h2>{{firstName}} {{lastName}}</h2>
+      <!-- 注意：调computed里的“方法”时，不需要加() -->
+      <h2>{{fullName}}</h2>
+      <h2>总成绩：{{totalScore}}</h2>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: "Michael",
+        lastName: "Miao",
+        subjects: [
+          { id: 100, name: "语文", score: 90 },
+          { id: 101, name: "数学", score: 95 },
+          { id: 102, name: "英语", score: 88 }
+        ]
+      },
+      // computed: 计算属性，并且起名的时候最好不要起带动词的名字，比如不要起getFullName，而叫fullName
+      computed: {
+        fullName: function() {
+          return `${this.firstName} ${this.lastName}`;
+        },
+        totalScore: function() {
+          return this.subjects.reduce(function(prev, cur) {
+            return prev + cur.score;
+          }, 0);
+        }
+      }
+    });
+  </script>
+</html>

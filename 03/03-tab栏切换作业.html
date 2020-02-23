@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <style>
+    .tab ul {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tab ul li {
+      box-sizing: border-box;
+      padding: 0;
+      float: left;
+      width: 100px;
+      height: 45px;
+      line-height: 45px;
+      list-style: none;
+      text-align: center;
+      border-top: 1px solid blue;
+      border-right: 1px solid blue;
+      cursor: pointer;
+    }
+
+    .tab ul li:first-child {
+      border-left: 1px solid blue;
+    }
+
+    .tab div {
+      width: 500px;
+      height: 300px;
+      display: none;
+      text-align: center;
+      font-size: 30px;
+      line-height: 300px;
+      border: 1px solid blue;
+      border-top: 0px;
+    }
+
+    .tab div.current {
+      display: block;
+    }
+
+    .active {
+      color: red;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="tab">
+        <ul>
+          <li
+            v-for="(item, index) in fruits"
+            :class="{active: currentIndex == index}"
+            @click="handleClick"
+          >
+            {{item}}
+          </li>
+        </ul>
+        <div
+          v-for="(item, index) in fruits"
+          :class="{current: currentIndex == index}"
+        >
+          <img :src="imgURL(index)" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        fruits: ["apple", "lemon", "banana"],
+        currentIndex: 0
+      },
+      methods: {
+        handleClick: function(event) {
+          let ele = event.target.innerText;
+          let index = this.fruits.indexOf(ele);
+          this.currentIndex = index;
+        },
+        imgURL: function(index) {
+          return `./img/${this.fruits[index]}.jpg`;
+        }
+      }
+    });
+  </script>
+</html>

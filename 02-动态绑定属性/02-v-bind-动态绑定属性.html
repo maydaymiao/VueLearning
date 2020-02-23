@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+  <body>
+    <!-- v-bind就是用于绑定数据和元素属性的 -->
+    <div id="app">
+      <img v-bind:src="imgURL" alt="" />
+      <a v-bind:href="aHref">百度一下</a>
+      <!-- 语法糖，直接用冒号 -->
+      <img :src="imgURL" alt="" />
+      <!-- 动态绑定class: 传一个对象{类名1：布尔值, 类名2: 布尔值} -->
+      <!-- 但同时也能绑定一个默认的class -->
+      <h2 class="default" :class="{active: isActive}">哈哈哈</h2>
+      <button @click="handleColor">点击切换颜色</button>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        imgURL:
+          "https://www.baidu.com/img/PC-pad_6d2362fef025ffd42a538cfab26ec26c.png",
+        aHref: "http://www.baidu.com",
+        isActive: true
+      },
+      methods: {
+        handleColor: function() {
+          this.isActive = !this.isActive;
+        }
+      }
+    });
+  </script>
+</html>

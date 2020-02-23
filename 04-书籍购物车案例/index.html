@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="./style.css" />
+  <body>
+    <div id="app">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>书籍姓名</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in books">
+            <!-- 这里就不要再用一次for循环了，因为有些属性里包含按钮什么的，再用一次for循环的话不好操作 -->
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.price | showPrice}}</td>
+            <td>
+              <button @click="decrement">-</button>
+              {{item.count}}
+              <button @click="increment">+</button>
+            </td>
+            <td><button>移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+<script src="/js/vue.js"></script>
+<script src="./main.js"></script>

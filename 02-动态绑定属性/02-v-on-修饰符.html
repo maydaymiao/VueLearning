@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <div @click="divClick">
+        <!-- .stop修饰符：阻止事件冒泡 -->
+        <button @click.stop="buttonClick">按钮</button>
+      </div>
+      <br />
+
+      <!-- .prevent修饰符：阻止默认事件 -->
+      <!-- 正常情况下点了submit按钮，会直接把表单提交给后台，加了.prevent可以阻止默认行为（自己在方法里定义行为） -->
+      <form action="www.baidu.com">
+        <input type="submit" value="提交" @click.prevent="submitClick" />
+      </form>
+      <br />
+      <!-- keyup修饰符：监听某个键的事件 -->
+      <input type="text" v-model="message" @keyup.enter="keySubmit" />
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: ""
+      },
+      methods: {
+        divClick() {
+          console.log("divClick");
+        },
+        buttonClick() {
+          console.log("buttonClick");
+        },
+        submitClick() {
+          console.log("submitClick");
+        },
+        keySubmit() {
+          console.log(this.message);
+        }
+      }
+    });
+  </script>
+</html>

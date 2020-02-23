@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <div v-for="(value, key, index) in obj">
+        {{value}}-{{key}}-{{index}}
+      </div>
+      <span v-if="value>80" v-for="value in scores">{{value}} </span>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        obj: {
+          name: "Michael",
+          age: 30,
+          gender: "male"
+        },
+        scores: [95, 87, 58, 32, 78, 100, 82]
+      }
+    });
+  </script>
+</html>

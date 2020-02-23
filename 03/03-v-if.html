@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- 如果需要频繁的让一个元素显示或隐藏，用v-show -->
+      <!-- 如果渲染出来变化比较少了，用v-if -->
+      <input type="number" v-model="value" />
+      <div v-if="value>=90">优秀</div>
+      <div v-else-if="value<90 && value>=80">良好</div>
+      <div v-else-if="value<80 && value>=60">及格</div>
+      <div v-else>不及格</div>
+      <!-- v-show的原理：控制元素样式是否显示display: none -->
+      <div v-show="flag">v-show测试</div>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        value: "",
+        flag: true
+      }
+    });
+  </script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <div>
+        <span v-if="flag">
+          <label for="account">用户账号: </label>
+          <!-- input最后那个key属性，如果不加的话，当你切换类型的时候（你已经在input框里输入了一些内容） ，切换后，新的input框里还会有同样的内容（虚拟DOM的原因）。加上这个key，并且两个key的值不同，就不会把已经输入的内容拷贝过去-->
+          <input
+            type="text"
+            placeholder="用户账号"
+            id="username"
+            key="username"
+          />
+        </span>
+        <span v-else>
+          <label for="email">用户邮箱: </label>
+          <input type="email" placeholder="用户邮箱" id="email" key="email" />
+        </span>
+        <button @click="switchType">切换类型</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        flag: true
+      },
+      methods: {
+        switchType() {
+          this.flag = !this.flag;
+        }
+      }
+    });
+  </script>
+</html>
