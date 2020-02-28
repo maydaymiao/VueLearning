@@ -8,33 +8,41 @@
   <link rel="stylesheet" href="./style.css" />
   <body>
     <div id="app">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>书籍姓名</th>
-            <th>出版日期</th>
-            <th>价格</th>
-            <th>购买数量</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in books">
-            <!-- 这里就不要再用一次for循环了，因为有些属性里包含按钮什么的，再用一次for循环的话不好操作 -->
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.date}}</td>
-            <td>{{item.price | showPrice}}</td>
-            <td>
-              <button @click="decrement">-</button>
-              {{item.count}}
-              <button @click="increment">+</button>
-            </td>
-            <td><button>移除</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-if="books.length">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>书籍姓名</th>
+              <th>出版日期</th>
+              <th>价格</th>
+              <th>购买数量</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in books">
+              <!-- 这里就不要再用一次for循环了，因为有些属性里包含按钮什么的，再用一次for循环的话不好操作 -->
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.date}}</td>
+              <td>{{item.price | showPrice}}</td>
+              <td>
+                <!-- 功能：当数量为1时，disable掉减号按钮。我一开始在data里建了一个布尔变量，但搞的很麻烦。这里直接在html里布尔表达式最简单 -->
+                <button @click="decrement(index)" :disabled="item.count <= 1">
+                  -
+                </button>
+                {{item.count}}
+                <button @click="increment(index) ">+</button>
+              </td>
+              <td><button @click="handleRemove(index)">移除</button></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h2>总价格： {{getPrice | showPrice}}</h2>
+      </div>
+      <h2 v-else>购物车为空</h2>
     </div>
   </body>
 </html>

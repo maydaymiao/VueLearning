@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- text lazy修饰符（懒加载)-敲回车或者失去焦点时，再实时绑定；若不加，只要在input框里输了，就实时相应 -->
+      <input type="text" v-model.lazy="message" />
+      <h2>{{message}}</h2>
+      <br />
+      <!-- text number修饰符, 如果下面不加number修饰符，则typeof age为String，即使input type为number -->
+      <input type="number" v-model.number="age" />
+      <h2>{{age}}-{{typeof age}}</h2>
+      <br />
+      <!-- text trim修饰符：去左右两边空格 -->
+      去空格：<input type="text" v-model.trim="message" />
+      <br />
+      <!-- radio -->
+      <label for="male">
+        <input type="radio" id="male" value="男啊" v-model="gender" />男
+      </label>
+      <label for="female">
+        <input type="radio" id="female" value="女啊" v-model="gender" />女
+      </label>
+      <h2>你的性别是：{{gender}}</h2>
+      <br />
+      <!-- checkbox-单选框，使用场景类似于同意协议可点击下一步 -->
+      <label for="agree">
+        <input type="checkbox" id="agree" v-model="isAgree" />同意协议
+      </label>
+      <h2>你选择的是：{{isAgree}}</h2>
+      <button :disabled="!isAgree">下一步</button>
+      <br />
+      <br />
+      <!-- checkbox-多选框，值写死 -->
+      <input type="checkbox" value="blue" v-model="colors" />蓝色
+      <input type="checkbox" value="red" v-model="colors" />红色
+      <input type="checkbox" value="yellow" v-model="colors" />黄色
+      <input type="checkbox" value="black" v-model="colors" />黑色
+      <h2>你选择的是：{{colors}}</h2>
+      <br />
+      <br />
+      <!-- checkbox-多选框，值绑定, 比如说值是服务器传来的 -->
+      <label v-for="item in originalColors" :for="item">
+        <input
+          type="checkbox"
+          v-model="colors"
+          :id="item"
+          :value="item"
+        />{{item}}
+      </label>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "",
+        age: 0,
+        gender: "",
+        isAgree: false, // checkbox单选框对应的就是布尔值
+        colors: [], // checkbox多选框对应的是数组,
+        originalColors: ["蓝色", "红色", "黄色", "黑色"]
+      }
+    });
+  </script>
+</html>

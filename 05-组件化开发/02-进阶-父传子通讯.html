@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <!-- Vue实例 -->
+    <div id="app">
+      <cpn :cmovies="movies"></cpn>
+    </div>
+    <!-- 组件 -->
+    <template id="cpn">
+      <div>
+        <h2>{{cmessages}}</h2>
+        <ul>
+          <li v-for="item in cmovies">{{item}}</li>
+        </ul>
+      </div>
+    </template>
+  </body>
+  <script>
+    //   在下面代码中，将Vue实例当作父组件
+    // 自定义组件
+    const cpn = {
+      template: "#cpn",
+      //   属性
+      //   父组件里有数据要往子组件里传，用props
+      props: {
+        // cmovies: Array,
+        cmovies: {
+          type: Array,
+          //   如果props的类型是对象或者数组时，默认值必须是一个函数，return一个数组（可以是空数组）
+          default() {
+            return [];
+          }
+        },
+        cmessages: {
+          type: String,
+          default: "这是一条默认消息"
+          //   required: true   //加了required说明在使用的时候，这个属性必传
+        }
+      }
+    };
+    // Vue实例
+    const app = new Vue({
+      el: "#app",
+      data: {
+        movies: ["教父", "叶问", "闻香识女人", "海王"]
+      },
+      components: {
+        cpn
+      }
+    });
+  </script>
+</html>

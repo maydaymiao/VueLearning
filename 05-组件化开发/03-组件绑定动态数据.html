@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <mycpn></mycpn>
+      <mycpn></mycpn>
+    </div>
+    <template id="mycpn">
+      <div>
+        <h2>{{title}}</h2>
+        <p>我是内容，哈哈哈</p>
+      </div>
+    </template>
+  </body>
+  <script>
+    //   注意：组件无法直接访问Vue实例里的data
+    const app = new Vue({
+      el: "#app",
+      components: {
+        mycpn: {
+          template: "#mycpn",
+          //   注意组件里的data，不能是对象。而是以函数形式并且返回一个对象，以下用ES6语法
+          //   本质是为了同一个组件，多次复用时，数据互相不冲突/影响。如果data是一个对象的话，在使用时，其实指向的是同一个data的内存地址
+          data() {
+            return {
+              title: "我是标题"
+            };
+          }
+        }
+      }
+    });
+  </script>
+</html>

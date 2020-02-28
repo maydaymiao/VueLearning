@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <mycpn></mycpn>
+      <mycpn></mycpn>
+    </div>
+
+    <!-- 方法一：script标签，注意类型必须是text/x-temlate -->
+    <!-- <script type="text/x-temlate" id="mycpn">
+      <div>
+        <h2>我是标题</h2>
+        <p>我是内容，哈哈哈</p>
+      </div>
+    </script> -->
+
+    <!-- 方法二：template标签，比较好记 -->
+    <template id="mycpn">
+      <div>
+        <h2>我是标题</h2>
+        <p>我是内容，哈哈哈</p>
+      </div>
+    </template>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        mycpn: {
+          template: "#mycpn"
+        }
+      }
+    });
+  </script>
+</html>

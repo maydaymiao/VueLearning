@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <mycpn></mycpn>
+      <mycpn></mycpn>
+    </div>
+  </body>
+  <script>
+    //   创建组件构造器对象
+    // const cpnConstru = Vue.extend({
+    //   template: `
+    //     <div>
+    //         <h2>我是标题</h2>
+    //         <p>我是内容，哈哈哈</p>
+    //     </div>
+    //       `
+    // });
+
+    // 注册组件（全局注册）
+    // Vue.component("mycpn", cpnConstru);
+
+    const app = new Vue({
+      el: "#app",
+      //   局部注册，注意组件名不能出现大写或者特殊字符
+      components: {
+        // mycpn: cpnConstru
+
+        // 语法糖，直接在components里注册，不需要extend，现在基本都用这种方式
+        mycpn: {
+          template: `
+        <div>
+            <h2>我是标题</h2>
+            <p>我是内容，哈哈哈</p>
+        </div>
+          `
+        }
+      }
+    });
+  </script>
+</html>

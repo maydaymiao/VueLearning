@@ -32,18 +32,29 @@ const app = new Vue({
       }
     ]
   },
+  computed: {
+    getPrice() {
+      return this.books.reduce((prev, cur) => {
+        return prev + cur.price * cur.count;
+      }, 0);
+    }
+  },
   filters: {
     showPrice(price) {
       return "￥" + price.toFixed(2);
     }
   },
   methods: {
-    increment(event) {
-      console.log(event);
-      //   this.data.books.count++;
+    increment(index) {
+      this.books[index].count++;
     },
-    decrement() {
-      //   this.data.books.count--;
+
+    decrement(index) {
+      this.books[index].count--;
+    },
+
+    handleRemove(index) {
+      this.books.splice(index, 1);
     }
   }
 });
