@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <cpn></cpn>
+      <cpn></cpn>
+      <cpn ref="aaa"></cpn>
+      <button @click="btnClick">按钮</button>
+    </div>
+  </body>
+  <template id="cpn">
+    <h2>我是组件</h2>
+  </template>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      methods: {
+        btnClick() {
+          // 方法1: $children，但是一般不用这种方法，因为如果需要拿某一个子组件的时候，需要用下标的方式，如果当中再有插入新的，下标会变化，不灵活。除非要获取所有子组件的元素或方法，才用$children
+          //   console.log(this.$children);
+          //   this.$children.forEach(element => {
+          //     console.log(element.name);
+          //     element.showMessage();
+          //   });
+
+          // 方法二: 通过$refs，需要先在html里的自定义组件里加上ref属性，类似定义id。如果啥都不定义，直接调this.$refs则获取到的是空对象
+          console.log(this.$refs.aaa.name);
+        }
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data() {
+            return {
+              name: "我是子组件的name"
+            };
+          },
+          methods: {
+            showMessage() {
+              console.log("showMessage 哈哈哈");
+            }
+          }
+        }
+      }
+    });
+  </script>
+</html>

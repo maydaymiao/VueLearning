@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- 作用域插槽在作用域上绑定属性来将子组件的信息传给父组件使用 -->
+      <!-- 用途：子组件的展示方法不满意，父组件获取子组件的数据进行个性化展示 -->
+      <cpn>
+        <template v-slot:rgb="{data}">
+          <span>{{data.join('-')}}</span>
+        </template>
+      </cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <!-- 这里的:data随便起什么名字都行 -->
+        <slot name="rgb" :data="colors">
+          <ul>
+            <li v-for="item in colors">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn: {
+          template: "#cpn",
+          data() {
+            return {
+              colors: ["red", "green", "blue"]
+            };
+          }
+        }
+      }
+    });
+  </script>
+</html>

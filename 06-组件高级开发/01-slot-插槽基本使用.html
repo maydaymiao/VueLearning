@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="/js/vue.js"></script>
+  <body>
+    <div id="app">
+      <cpn><button>组件按钮</button></cpn>
+      <cpn
+        ><span>span元素</span>
+        <p>p元素</p></cpn
+      >
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>我是组件标题</h2>
+        <p>我是内容，哈哈哈</p>
+        <slot></slot>
+        <!-- slot里放一个默认的元素，如果调用的时候不填新的，则用默认的，如果填了新的，则覆盖 -->
+        <slot><button>slot默认按钮</button></slot>
+      </div>
+    </template>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn: {
+          template: "#cpn"
+        }
+      }
+    });
+  </script>
+</html>
