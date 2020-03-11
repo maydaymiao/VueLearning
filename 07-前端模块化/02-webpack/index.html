@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <!-- 由于是用的CommonJS导出的，如果直接引用main.js，浏览器并不支持解析module.exports, 所以代码在src中写好后，在Terminal中用下列命令行，打包成bundle.js，并且引用 -->
+  <!-- 方法一：webpack ./src/main.js ./dist/bundle.js -->
+  <!-- 方法二：维护webpack.config.js文件，直接在Terminal中使用webpack -->
+  <script src="./dist/bundle.js"></script>
+  <body></body>
+</html>
